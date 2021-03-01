@@ -124,7 +124,6 @@
             try {
                 loader.style.display = "block"
                 console.log("creating comment.... ")
-                loader
                 const resp = await axios.post('https://api.jsonbin.io/b/603bbeb40866664b10853263', newComment);
                 loader.style.display = "none"
                 console.log(resp.data);
@@ -137,13 +136,13 @@
 
         // API Calls
         loadJSON()
-        /* createComment({
-             "id": "111",
-             "title": "Password accessibility label",
-             "keywords": "Slack Password accessibility label",
-             "description": "As per your expected result if 'show password' button is associated with its respective edit field label then navigating to show password button screen readers will read like below:\r\nEnter old password button\r\nEnter new password button\r\nConfirm new password button\r\nWe should not associate show password button with edit fields instead we should add a new accessibility label to describe the purpose of all show password button so that reader user will here like below:\r\nShow old password button\r\nShow new password button\r\nShow confirm new password button",
-             "type": "Web"
-         })*/
+        createComment({
+            "id": "111",
+            "title": "Password accessibility label",
+            "keywords": "Slack Password accessibility label",
+            "description": "As per your expected result if 'show password' button is associated with its respective edit field label then navigating to show password button screen readers will read like below:\r\nEnter old password button\r\nEnter new password button\r\nConfirm new password button\r\nWe should not associate show password button with edit fields instead we should add a new accessibility label to describe the purpose of all show password button so that reader user will here like below:\r\nShow old password button\r\nShow new password button\r\nShow confirm new password button",
+            "type": "Web"
+        })
 
         //UI Functions Declaration
         const fillTable = () => {
