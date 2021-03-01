@@ -88,33 +88,14 @@
 
     </div>
     <script>
+        const axios = require('axios').default;
         const loader = document.querySelector("#loader")
         const tableBody = document.querySelector("#table-body")
         const spanCount = document.querySelector("#count")
         const commentDetails = document.querySelector("#comment-container")
         const slackTable = document.querySelector("#slack-table")
 
-        const fillTable = () => {
-            data.forEach((row) => {
-                tableBody.appendChild(getRow(row))
-            })
-        }
-        const getRow = (object) => {
-            const row = document.createElement("tr")
-            const idTd = document.createElement("td")
-            const titleTd = document.createElement("td")
-            const typeTd = document.createElement("td")
-
-            idTd.innerHTML = object.id;
-            titleTd.innerHTML = object.title;
-            typeTd.innerHTML = object.type;
-
-            row.appendChild(idTd)
-            row.appendChild(titleTd)
-            row.appendChild(typeTd)
-            return row
-        }
-
+        // API funcions declaration
         async function loadJSON() {
 
             loader.style.display = "block"
@@ -139,21 +120,59 @@
 
         }
 
+        const createComment = async (newComment) => {
+            try {
+                loader.style.display = "block"
+                console.log("creating comment.... ")
+                loader
+                const resp = await axios.post('https://api.jsonbin.io/b/603bbeb40866664b10853263', newComment);
+                loader.style.display = "none"
+                console.log(resp.data);
+                console.log("Comment created!")
+            } catch (err) {
+                // Handle Error Here
+                console.error("No comment created!", err);
+            }
+        };
 
         // API Calls
-
         loadJSON()
+        createComment({
+            "id": "111",
+            "title": "Password accessibility label",
+            "keywords": "Slack Password accessibility label",
+            "description": "As per your expected result if 'show password' button is associated with its respective edit field label then navigating to show password button screen readers will read like below:\r\nEnter old password button\r\nEnter new password button\r\nConfirm new password button\r\nWe should not associate show password button with edit fields instead we should add a new accessibility label to describe the purpose of all show password button so that reader user will here like below:\r\nShow old password button\r\nShow new password button\r\nShow confirm new password button",
+            "type": "Web"
+        })
 
-        // UI Functions
+        //UI Functions Declaration
+        const fillTable = () => {
+            data.forEach((row) => {
+                tableBody.appendChild(getRow(row))
+            })
+        }
+        const getRow = (object) => {
+            const row = document.createElement("tr")
+            const idTd = document.createElement("td")
+            const titleTd = document.createElement("td")
+            const typeTd = document.createElement("td")
+
+            idTd.innerHTML = object.id;
+            titleTd.innerHTML = object.title;
+            typeTd.innerHTML = object.type;
+
+            row.appendChild(idTd)
+            row.appendChild(titleTd)
+            row.appendChild(typeTd)
+            return row
+        }
+
+        // UI Functions Calls
         const closeModal = () => {
 
             commentDetails.style.display = "none"
             slackTable.style.display = "block"
-
-            /*commentDetails.classList.add = "d-none"
-            slackTable.classList.add = "d-block"*/
         }
-
         const showModal = (obj) => {
 
             const commentModal = document.querySelector("#comment-modal")
@@ -183,14 +202,10 @@
 
             commentDetails.style.display = "block"
             slackTable.style.display = "none"
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-            /*commentDetails.classList.remove = "d-none"
-            slackTable.classList.remove = "d-none"*/
-
-
+            window.scrollTo({ top: 0, behavior: 'smooth' })
         }
 
-        // handlers
+        // Handlers
         const onRowClick = (event) => {
             const commentId = event.target.parentNode.children[0].innerText
             const selectedComment = data.find(element => element.id == commentId)
