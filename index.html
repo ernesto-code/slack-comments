@@ -101,7 +101,7 @@
 
             loader.style.display = "block"
             console.log("fetching...")
-            const response = await fetch('https://api.jsonbin.io/b/603bbeb40866664b10853263')
+            const response = await fetch('https://api.jsonbin.io/b/603bbeb40866664b10853263/1')
                 .then(response => response.json())
                 .then(jsonData => {
                     data = jsonData
@@ -139,13 +139,8 @@
 
         // API Calls
         loadJSON()
-        updateBin({
-            "id": "111",
-            "title": "Password accessibility label",
-            "keywords": "Slack Password accessibility label",
-            "description": "As per your expected result if 'show password' button is associated with its respective edit field label then navigating to show password button screen readers will read like below:\r\nEnter old password button\r\nEnter new password button\r\nConfirm new password button\r\nWe should not associate show password button with edit fields instead we should add a new accessibility label to describe the purpose of all show password button so that reader user will here like below:\r\nShow old password button\r\nShow new password button\r\nShow confirm new password button",
-            "type": "Web"
-        })
+
+
 
         //UI Functions Declaration
         const fillTable = () => {
