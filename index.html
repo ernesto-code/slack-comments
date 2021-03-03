@@ -188,7 +188,7 @@
 
         // Handlers
         const onRowClick = (event) => {
-            const commentId = event.target.parentNode.children[0].innerText
+            const commentNumber = Number(event.target.parentNode.children[0].innerText)
             const selectedComment = data[commentNumber - 1]
             showModal(selectedComment)
             console.log("row clicked")
